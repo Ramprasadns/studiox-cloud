@@ -1,0 +1,17 @@
+StudioX Cloud - Quick Deploy Guide
+---------------------------------
+
+1) Create GitHub repo named: studiox-cloud
+2) Upload the extracted files from this bundle into the repo root.
+3) Sign into Vercel with your GitHub account (ramaigen2025@gmail.com).
+4) In Vercel, click 'New Project' -> Import Git Repository -> select studiox-cloud.
+5) Add environment variables in Vercel Project Settings -> Environment Variables:
+   - STUDIOX_ADMIN_EMAIL=ramaigen2025@gmail.com
+   - DEFAULT_STORY=The Pebble Path
+   - PROJECT_MODE=cloud
+   - (Optional) API keys: NANOBANANA_API_KEY, VOICE_API_KEY, WHISPER_API_KEY
+6) Click Deploy. Wait ~20 minutes for the build + serverless functions to be available.
+7) Open the deployed URL. Login via Google (ramaigen2025@gmail.com will be Super Admin).
+8) Generate a sample story from the Dashboard -> Sample Stories.
+
+Note: This is a placeholder bundle. Replace backend/app.py and frontend source with working code for full functionality.

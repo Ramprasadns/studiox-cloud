@@ -23,8 +23,7 @@ def serve_frontend(full_path: str):
     index_path = os.path.join(frontend_dir, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"error": "Frontend not found. Please rebuild the app."}
-
+    return {"error": "Frontend not found. Please rebuild the app."} 
 # ✅ Local run
 if __name__ == "__main__":
     import uvicorn

@@ -1,23 +1,20 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import os
 
 app = FastAPI()
 
-# Serve static frontend files
-frontend_path = os.path.join(os.getcwd(), "frontend", "public")
+# ✅ Serve frontend static files
+frontend_dir = os.path.join(os.path.dirname(__file__), "frontend", "public")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+else:
+    @app.get("/")
+    async def frontend_not_found():
+        return {"error": "Frontend not found. Please rebuild the app."}
 
-if os.path.exists(frontend_path):
-    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
-
-@app.get("/")
-def serve_frontend():
-    index_path = os.path.join(frontend_path, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return JSONResponse({"error": "Frontend not found. Please rebuild the app."}, status_code=404)
-
+# ✅ Health check route
 @app.get("/api/health")
 def health():
     return {"status": "ok", "service": "studiox-backend"}

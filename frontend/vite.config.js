@@ -2,14 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// Vite configuration
+// Vite configuration optimized for Render
 export default defineConfig({
   plugins: [react()],
-  root: '.', // ensures correct relative paths for subfolder builds
-  base: './', // ensures static files load correctly after deployment
+  root: '.', // main project folder
+  base: './', // ensures correct relative asset paths
   build: {
-    outDir: 'dist',
-    emptyOutDir: true, // clears dist before rebuild
+    outDir: 'dist',          // output build to frontend/dist
+    emptyOutDir: true,       // clear previous build files
+    assetsDir: 'assets',     // folder for static assets
+    sourcemap: false,        // disable maps in production
   },
   resolve: {
     alias: {
@@ -17,7 +19,11 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,              // required for Render’s preview builds
     port: 5173,
-    open: true,
+    open: false,
+  },
+  preview: {
+    port: 4173,
   },
 })

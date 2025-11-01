@@ -1,2 +1,6 @@
 fastapi==0.115.2
 uvicorn==0.27.1
+requests
+python-multipart
+pydantic
+jinja2

@@ -1,5 +1,2 @@
-fastapi
-uvicorn
-pydantic
-aiofiles
-python-multipart
+fastapi==0.115.2
+uvicorn==0.27.1

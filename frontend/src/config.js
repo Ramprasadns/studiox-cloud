@@ -1,1 +1,2 @@
-export const API_BASE = 'https://studiox-cloud-1.onrender.com';\n
+// StudioX Cloud API Base URL
+export const API_BASE = "https://studiox-cloud-1.onrender.com";

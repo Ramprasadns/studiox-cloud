@@ -1,10 +1,5 @@
-fastapi==0.115.2
-uvicorn==0.27.1
-pydantic==2.9.2
-gradio==5.3.0
-transformers==4.38.0
-gtts==2.5.3
-pydub==0.25.1
-moviepy==1.0.3
-requests==2.32.3
-python-multipart==0.0.9
+fastapi
+uvicorn
+pydantic
+aiofiles
+python-multipart

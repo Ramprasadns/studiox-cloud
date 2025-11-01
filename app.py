@@ -1,44 +1,35 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse, JSONResponse
 import os
 
-app = FastAPI(title="StudioX Cloud Backend", version="1.0")
+app = FastAPI(title="StudioX Cloud", version="1.0")
 
-# Enable CORS
+# Allow frontend calls
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Serve static frontend files
-frontend_dir = os.path.join(os.path.dirname(__file__), "frontend", "public")
+# Serve frontend files
+frontend_dir = os.path.join(os.getcwd(), "frontend", "public")
 if os.path.exists(frontend_dir):
     app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
-else:
-    @app.get("/")
-    async def missing_frontend():
-        return JSONResponse({"error": "Frontend not found. Please rebuild the app."})
 
-# Health check endpoint
+# Health check
 @app.get("/api/health")
-async def health():
+def health_check():
     return {"status": "ok", "service": "studiox-backend"}
 
-# Root API info
-@app.get("/api/info")
-async def info():
-    return {
-        "name": "StudioX Cloud",
-        "version": "1.0",
-        "description": "AI Voice & Video Narration Studio",
-    }
-
-# Optional test route
-@app.get("/api/test")
-async def test():
-    return {"message": "Backend is running perfectly ✅"}
+# Placeholder API for demo
+@app.get("/api/sample")
+def sample_story():
+    stories = [
+        {"title": "The Pebble Path", "message": "Click Generate to create a sample video"},
+        {"title": "Rise of Anu", "message": "An inspiring tale of courage and self-belief."},
+        {"title": "The Box of Dreams", "message": "A magical journey of imagination."}
+    ]
+    return JSONResponse(content={"stories": stories})
